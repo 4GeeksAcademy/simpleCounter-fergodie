@@ -1,12 +1,25 @@
 //import react into the bundle
-import React from "react";
-import ReactDOM from "react-dom";
 
-// include your styles into the webpack bundle
-import "../styles/index.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Home from './component/home';
 
-//import your own components
-import Home from "./component/home.jsx";
+let segundos = 0;
+let minutos = 0;
+let horas = 0;
 
-//render your react application
-ReactDOM.render(<Home />, document.querySelector("#app"));
+setInterval(() => {
+  segundos += 1;
+
+  if (segundos === 60) {
+    segundos = 0;
+    minutos += 1;
+
+    if (minutos === 60) {
+      minutos = 0;
+      horas += 1;
+    }
+  }
+
+  ReactDOM.render(<Home horas={horas} minutos={minutos} segundos={segundos} />, document.querySelector('#app'));
+}, 1000);
